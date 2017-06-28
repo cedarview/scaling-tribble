@@ -2,7 +2,7 @@
 - 首先获取ConnectivityManager
 - 然后再调用GetActiveNetworkInfo
 
-```
+```java
   ConnectivityManager connMgr =
       (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
   NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
@@ -22,7 +22,7 @@
  1. ConnectivityManager
  
     调用ConnectivityService的getActiveNetworkInfo
- ```
+ ```java
      public NetworkInfo getActiveNetworkInfo() {
         try {
             return mService.getActiveNetworkInfo();
@@ -34,7 +34,8 @@
  2. ConnectivityService.getActiveNetworkInfo
     1. 调用**getUnfilteredActiveNetworkState**
     2. 调用**filterNetworkStateForUid**过滤网络状态
-    ```
+    
+ ```java
     public NetworkInfo getActiveNetworkInfo() {
         enforceAccessPermission();
         final int uid = Binder.getCallingUid();
@@ -43,9 +44,10 @@
         maybeLogBlockedNetworkInfo(state.networkInfo, uid);
         return state.networkInfo;
     }
-    ```
- 3. getUnfilteredActiveNetworkState 获取网络状态信息
  ```
+ 
+ 3. getUnfilteredActiveNetworkState 获取网络状态信息
+ ```java
  private NetworkState getUnfilteredActiveNetworkState(int uid) {
     NetworkAgentInfo nai = getDefaultNetwork();
     final Network[] networks = getVpnUnderlyingNetworks(uid);
@@ -72,7 +74,7 @@
  一些app被限制访问网络则获取不到网络信息
  调用**isNetworkWithLinkPropertiesBlocked**判断该uid是否被限制网络访问
  如果判断为Blocked将调用 **networkInfo.setDetailedState**,会将mState设置为State.DISCONNECTED
- ```
+ ```java
  private void filterNetworkStateForUid(NetworkState state, int uid, boolean ignoreBlocked) {
     if (state == null || state.networkInfo == null || state.linkProperties == null) return;
     if (isNetworkWithLinkPropertiesBlocked(state.linkProperties, uid, ignoreBlocked)) {
@@ -96,7 +98,7 @@
  - 当进入appid的时候会调用会通过NetworkPolicyService调用onUidRulesChanged来更新这些规则
  - 在构造函数中将mPolicyListener设置给了networkPolicyManager的mConnectivityListener
  `mPolicyManager.setConnectivityListener(mPolicyListener);`
- ```
+ ```java
  private boolean isNetworkWithLinkPropertiesBlocked(LinkProperties lp, int uid,
         boolean ignoreBlocked) {
     // Networks aren't blocked when ignoring blocked status
@@ -147,7 +149,7 @@
 前面判断为blocked的时候就会调用setDetailedState将mState设置为DISCONNECTED
 `stateMap.put(DetailedState.BLOCKED, State.DISCONNECTED);`
 `state.networkInfo.setDetailedState(DetailedState.BLOCKED, null, null);`
-```
+```java
 public void setDetailedState(DetailedState detailedState, String reason, String extraInfo) {
     synchronized (this) {
         this.mDetailedState = detailedState;
