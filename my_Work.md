@@ -7,7 +7,7 @@
 解决方案:将热点开着时打开wifi后的下一状态正确设置
 
 #### 2. don't auto scan when screen_on & wifiStateMachine was in ScanModeState
-问题(964471):亮屏之后wifi没有自动扫描
+问题(964471):亮屏之后wifi没有自动连接,其实是因为没有扫描
 
 原因:  
 sleep_policy == 0;息屏一段时间后wifi断开,  
