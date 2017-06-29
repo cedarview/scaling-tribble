@@ -10,9 +10,11 @@
 问题(964471):亮屏之后wifi没有自动扫描
 
 原因:  
-sleep_policy == 0;息屏一段时间后wifi断开,WifiStateMachine退到ScanModeState
-WifiStateMachine处于scanmodeState
-CMD_SCREEN_STATE_CHANGED comes earlier than CMD_SET_OPERATIONAL_MODE.
+sleep_policy == 0;息屏一段时间后wifi断开,  
+WifiStateMachine退到ScanModeState  
+WifiController退至ScanOnlyLockHeldState  
+亮屏之后,WifiStateMachine处理消息的时候  
+CMD_SCREEN_STATE_CHANGED 来的比 CMD_SET_OPERATIONAL_MODE 早一些,导致无法启动启动扫描的流程.
 
 解决方案:  
 在ScanModeState添加对CMD_SCREEN_STATE_CHANGED处理的代码,如果
