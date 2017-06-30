@@ -1,3 +1,4 @@
+```
 diff --git a/services/core/java/com/android/server/DeviceIdleController.java b/services/core/java/com/android/server/DeviceIdleController.java
 index ba3edb7..e52a1ea 100755
 --- a/services/core/java/com/android/server/DeviceIdleController.java
@@ -116,3 +117,4 @@ index ba3edb7..e52a1ea 100755
              pw.print("  mForceIdle="); pw.println(mForceIdle);
              pw.print("  mMotionSensor="); pw.println(mMotionSensor);
              pw.print("  mCurDisplay="); pw.println(mCurDisplay);
+```
