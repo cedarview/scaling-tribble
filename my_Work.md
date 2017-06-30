@@ -49,4 +49,10 @@ TetherMasterSM掉到ErrorState的子状态出不来
 解决方案:  
 通过提供的接口获取双开应用的userId,再查找所有package,看其是否是双开app,如果是双开app则将其加入要加的iptables的列表中.
 
+#### 2. Shorten time to IdleMode
+
+缩短进入Idle的时间  
+
+设置alarm的时候缩短alarm时间
+
 # 3.AppStandby
