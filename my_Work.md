@@ -13,8 +13,9 @@
 sleep_policy == 0;息屏一段时间后wifi断开,  
 WifiStateMachine退到ScanModeState  
 WifiController退至ScanOnlyLockHeldState  
-亮屏之后,WifiStateMachine处理消息的时候  
+亮屏之后,  
 WifiController转到DeviceActiveState会设置operationalMode  
+WifiStateMachine处理消息的时候  
 但CMD_SCREEN_STATE_CHANGED 来的比 CMD_SET_OPERATIONAL_MODE 早一些,导致无法启动启动扫描的流程.
 
 解决方案:  
