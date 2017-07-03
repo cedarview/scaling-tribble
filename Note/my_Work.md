@@ -23,7 +23,7 @@ WifiStateMachine处理消息的时候
 wifi当前处于关闭状态,则延迟对亮屏消息的处理
 
 #### 3.wifi_icon flash when close airplane_mode or hotspot
-问题:后天扫描打开,关闭热点或飞行模式的时候wifi图标闪
+问题:后台扫描打开,关闭热点或飞行模式的时候wifi图标闪
 
 原因:  
 关闭热点或飞行模式时,重新打开wifi,有两次设置wifistate  
